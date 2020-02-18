@@ -1,3 +1,22 @@
 .my-header{
     font-family: Seaweed Script, sans-serif;
+    text-align: center;
+    vertical-align: center;
+}
+.header-title{
+    font-size: 30px;
+    display: inline-block;
+    color: #FF8A00;
+    letter-spacing: 12px;
+    line-height: 41px;
+}
+body{
+    display: flex;
+    align-items: center;
+}
+.content{
+    flex-grow: 4;
+}
+.filter{
+    flex-grow: 1;
 }

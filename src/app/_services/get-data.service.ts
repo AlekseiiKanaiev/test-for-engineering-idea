@@ -20,25 +20,32 @@ export class GetDataService {
     );
   }
 
-  requestData(filters: string[]) {
+
+
+  requestData(filters: string[], position: number) {
+    console.log(0);
+    console.log(filters);
     this.cocktailsLists.length = 0;
+    console.log(this.cocktailsLists);
     filters.map(el => el.replace(' ', '_'));
-    for (let filter of filters) {
-      const list: CoctailsList = {
-        category: '',
-        cocktails: []
-      };
-      this.http.get<CocktailsData>(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filter}`).pipe(
+    // filter.replace(' ', '_');
+    for (let i = 0; i < filters.length; i++) {
+      this.http.get<CocktailsData>(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${filters[i]}`).pipe(
         map((data: CocktailsData) => data.drinks)
       ).subscribe(
         (data: CocktailModel[]) => {
-          console.log(data);
-          list.category = filter;
+          // console.log(data);
+          const list: CoctailsList = {
+            category: '',
+            cocktails: []
+          };
+          list.category = filters[i];
           list.cocktails = data;
-          this.cocktailsLists.push(list);
-          console.log(this.cocktailsLists);
+          console.log(i, list);
+          this.cocktailsLists.splice(i, 0, list);
           if (this.cocktailsLists.length === filters.length) {
             console.log(1);
+            console.log(this.cocktailsLists);
             this.obsCocktailsLists.next(this.cocktailsLists);
           }
         }

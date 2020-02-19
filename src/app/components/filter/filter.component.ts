@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { GetDataService } from 'src/app/_services/get-data.service';
 import { Subscription } from 'rxjs';
-import { NgModel, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { strict } from 'assert';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-filter',
@@ -14,6 +13,17 @@ export class FilterComponent implements OnInit, OnDestroy {
   filterSubs: Subscription;
   filters: string[];
   selectedFilters: string[] = [];
+  fCount = 0;
+
+  // @HostListener('window:scroll')
+  // // В случае скрола выполняем функцию
+  // onWindowScroll() {
+  //   // Сравниваем прокрученный экран и высоту экрана
+  //   if (window.scrollY + window.innerHeight >= window.document.body.offsetHeight) {
+  //     console.log(this.selectedFilters);
+  //     this.getDataServ.requestData(this.selectedFilters.shift(), this.fCount++);
+  //   }
+  // }
 
   constructor(private getDataServ: GetDataService) {
     this.filtersForm = new FormGroup({
@@ -32,21 +42,22 @@ export class FilterComponent implements OnInit, OnDestroy {
   }
 
   addFilters(filters: string[]) {
-    for (let filter of filters) {
-      (this.filtersForm.controls['filters'] as FormArray).push(new FormControl(filter));
+    for (const filter of filters) {
+      (this.filtersForm.controls.filters as FormArray).push(new FormControl(filter));
     }
   }
 
   apply(filters: Array<string | boolean>) {
     console.log(this.filtersForm);
+    this.selectedFilters.length = 0;
+    this.fCount = 0;
     for (let i = 0; i < this.filters.length; i++) {
       if (filters[i]) {
         this.selectedFilters.push(this.filters[i]);
       }
     }
-    // this.selectedFilters = this.filters.filter(el => el !== false);
     console.log(this.selectedFilters);
-    this.getDataServ.requestData(this.selectedFilters);
+    this.getDataServ.requestData(this.selectedFilters, this.fCount++);
   }
 
   ngOnDestroy(): void {

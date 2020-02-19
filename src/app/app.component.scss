@@ -21,12 +21,14 @@
 }
 .my-body{
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     margin: 0;
 }
 .content{
-    flex-grow: 4;
+    flex-grow: 9;
 }
 .filter{
     flex-grow: 1;
+    padding-top: 30px;
+    // padding-left: 40px;
 }

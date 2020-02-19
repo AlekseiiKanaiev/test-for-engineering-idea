@@ -1,1 +1,13 @@
-<p>content works!</p>
+<div class="content">
+    <div class="coctails-list" *ngFor="let list of cocktailsLists">
+        <h2 class="content-header">{{ list.category }}</h2>
+        <div class="cocktails-grid">
+            <div class="cocktail-item" *ngFor="let item of list.cocktails">
+                <img [src]="item.strDrinkThumb" [alt]="item.strDrink" class="cocktail-img">
+                <div class="cocktail-name">
+                    {{ item.strDrink }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

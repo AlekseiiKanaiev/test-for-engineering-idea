@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 export class ContentComponent implements OnInit, AfterViewChecked, OnDestroy {
   private contentSubs: Subscription;
   cocktailsLists: CoctailsList[] = [];
+
   constructor(private getDataServ: GetDataService) { }
 
   @HostListener('window:scroll')
@@ -43,5 +44,4 @@ export class ContentComponent implements OnInit, AfterViewChecked, OnDestroy {
   ngOnDestroy() {
     this.contentSubs.unsubscribe();
   }
-
 }

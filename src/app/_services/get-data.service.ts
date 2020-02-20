@@ -41,7 +41,7 @@ export class GetDataService {
     }
   }
 
-  clearContent() {
+  private clearContent() {
     this.obsCocktailsLists.next([]);
   }
 }

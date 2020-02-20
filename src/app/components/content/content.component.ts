@@ -18,7 +18,6 @@ export class ContentComponent implements OnInit, AfterViewChecked, OnDestroy {
   onWindowScroll() {
     // Сравниваем прокрученный экран и высоту экрана
     if (window.scrollY + window.innerHeight >= window.document.body.offsetHeight) {
-      // console.log(this.selectedFilters);
       this.getDataServ.requestData();
     }
   }
@@ -28,24 +27,15 @@ export class ContentComponent implements OnInit, AfterViewChecked, OnDestroy {
       (data: CoctailsList[]) => {
         if (data.length !== 0) {
           this.cocktailsLists = this.cocktailsLists.concat(data);
-          // if (window.innerHeight >= window.document.body.offsetHeight) {
-          //   this.getDataServ.requestData();
-          // }
         } else {
           this.cocktailsLists.length = 0;
         }
-        // if (window.innerHeight >= window.document.body.offsetHeight) {
-        //   this.getDataServ.requestData();
-        // }
       }
     );
-    // this.getDataServ.requestData();
   }
 
   ngAfterViewChecked() {
-    console.log(3);
     if (window.innerHeight >= window.document.body.offsetHeight && this.cocktailsLists.length > 0) {
-      console.log(4);
       this.getDataServ.requestData();
     }
   }

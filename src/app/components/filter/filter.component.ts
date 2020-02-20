@@ -21,7 +21,7 @@ export class FilterComponent implements OnInit, OnDestroy {
   //   // Сравниваем прокрученный экран и высоту экрана
   //   if (window.scrollY + window.innerHeight >= window.document.body.offsetHeight) {
   //     console.log(this.selectedFilters);
-  //     this.getDataServ.requestData(this.selectedFilters.shift(), this.fCount++);
+  //     this.requestData();
   //   }
   // }
 
@@ -50,15 +50,24 @@ export class FilterComponent implements OnInit, OnDestroy {
   apply(filters: Array<string | boolean>) {
     console.log(this.filtersForm);
     this.selectedFilters.length = 0;
-    this.fCount = 0;
+    // this.fCount = 0;
+    // this.getDataServ.clearContent();
     for (let i = 0; i < this.filters.length; i++) {
       if (filters[i]) {
         this.selectedFilters.push(this.filters[i]);
       }
     }
-    console.log(this.selectedFilters);
-    this.getDataServ.requestData(this.selectedFilters, this.fCount++);
+    // console.log(this.selectedFilters);
+    this.getDataServ.setFilters(this.selectedFilters);
+    this.getDataServ.requestData();
+    // this.requestData();
   }
+
+  // requestData() {
+  //   if (this.selectedFilters.length !== 0) {
+  //     this.getDataServ.requestData(this.selectedFilters.shift(), this.fCount++);
+  //   }
+  // }
 
   ngOnDestroy(): void {
     this.filterSubs.unsubscribe();

@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./content.component.scss']
 })
 export class ContentComponent implements OnInit, AfterViewChecked, OnDestroy {
-  contentSubs: Subscription;
+  private contentSubs: Subscription;
   cocktailsLists: CoctailsList[] = [];
   constructor(private getDataServ: GetDataService) { }
 

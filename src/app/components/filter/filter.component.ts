@@ -9,11 +9,10 @@ import { FormGroup, FormArray, FormControl } from '@angular/forms';
   styleUrls: ['./filter.component.scss']
 })
 export class FilterComponent implements OnInit, OnDestroy {
+  private filterSubs: Subscription;
   filtersForm: FormGroup;
-  filterSubs: Subscription;
   filters: string[];
   selectedFilters: string[] = [];
-  fCount = 0;
 
   constructor(private getDataServ: GetDataService) {
     this.filtersForm = new FormGroup({

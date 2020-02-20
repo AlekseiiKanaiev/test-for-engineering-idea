@@ -8,12 +8,14 @@ import { AppComponent } from './app.component';
 import { ContentComponent } from './components/content/content.component';
 import { FilterComponent } from './components/filter/filter.component';
 import { GetDataService } from './_services/get-data.service';
+import { ToTopComponent } from './components/to-top/to-top.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContentComponent,
     FilterComponent,
+    ToTopComponent,
   ],
   imports: [
     BrowserModule,
